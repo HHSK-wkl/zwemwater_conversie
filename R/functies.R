@@ -5,13 +5,37 @@
 # }
 
 
+selectie <- c(#"Monster.identificatie" = "Id text",
+  # "Meetobject.Namespace" = "",
+  "Meetobject.lokaalid" = "Sample name",
+  "Typering.code" = "Typering code",
+  # "Typering.omschrijving" = "Typering omschrijving",
+  "Grootheid.code" = "Grootheid code",
+  # "Grootheid.omschrijving" = "Grootheid omschrijving",
+  "Parameter.code" = "Parameter code",
+  "Parameter.groep" = "Parameter groep",
+  # "Parameter.omschrijving" = "Parameter omschrijving",
+  "Eenheid.code" = "Units",
+  "Hoedanigheid.code" = "Hoedanigheid code",
+  "AnalyseCompartiment.code" = "Compartiment code",
+  "Waardebewerkingsmethode.code" = "Waardepalingsmethode code",
+  "Waardebepalingsmethode.code" = "Waardebewerkingsmethode code",
+  "Begindatum" = "Zwem begindatum",
+  "Begintijd" = "Zwem begintijd",
+  "Einddatum" = "Zwem einddatum",
+  "Eindtijd" = "Zwem eindtijd",
+  "Limietsymbool" = "Limietsymbool",
+  "Numeriekewaarde" = "Numeriekewaarde",
+  "Alfanumeriekewaarde" = "Alfanumeriekewaarde",
+  "Kwaliteitsoordeel.code" = "Kwaliteits oordeel")
+
 # data <- read_data("testdata/data met alle kolommen.xls")
 
 
 conversiefunctie <- function(data){
   
   data %>% 
-    select(selectie) %>% 
+    select(all_of(selectie)) %>% 
     mutate(Meetobject.Namespace = "NLBW39", .before = Meetobject.lokaalid) %>% 
     filter(Parameter.code %in% c("CHLFa", "E_COLI", "INTTNLETRCCN") | 
              Typering.code %in% c("CATCANBTRDLG", "CATCANBTRMT"),
@@ -29,7 +53,7 @@ conversiefunctie <- function(data){
 missende_data <- function(data){
   
   data %>% 
-    select(selectie) %>% 
+    select(all_of(selectie)) %>% 
     mutate(Meetobject.Namespace = "NLBW39", .before = Meetobject.lokaalid) %>% 
     filter(Parameter.code %in% c("CHLFa", "E_COLI", "INTTNLETRCCN") | 
              Typering.code %in% c("CATCANBTRDLG", "CATCANBTRMT"),
