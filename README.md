@@ -1,0 +1,2 @@
+# zwemwater_conversie
+Conversie zwemwaterbestanden vanuit inkijkfunctie naar zwemwaterregister
